@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 
 namespace Artikelverwaltung
 {
@@ -6,7 +7,12 @@ namespace Artikelverwaltung
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Artikelverwaltung av = new Artikelverwaltung();
+            Artikel art = new Artikel("05477855","Banane","kg",1,1.0);
+            av.add(art);
+            Console.WriteLine(JsonSerializer.Serialize(av));
+            
+
         }
     }
 }
