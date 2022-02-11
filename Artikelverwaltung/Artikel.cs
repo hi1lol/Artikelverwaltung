@@ -19,5 +19,11 @@ namespace Artikelverwaltung
             this.Menge = Menge;
             this.Preis = Preis;
         }
+
+        public override string ToString()
+        {
+            return "Artikelnummer: " +Artikelnummer+ ", Artikelbezeichnung: " + Artikelbezeichnung+
+                ", Einheit: "+ Mengeneinheit+ ", Menge: "+ Menge+ ", Preis: "+Preis;
+        }
     }
 }
