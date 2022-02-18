@@ -22,8 +22,8 @@ namespace Artikelverwaltung
 
         public override string ToString()
         {
-            return "Artikelnummer: " +Artikelnummer+ ", Artikelbezeichnung: " + Artikelbezeichnung+
-                ", Einheit: "+ Mengeneinheit+ ", Menge: "+ Menge+ ", Preis: "+Preis;
+            return "Artikelnummer: " + Artikelnummer + ", Artikelbezeichnung: " + Artikelbezeichnung +
+                ", Einheit: " + Mengeneinheit + ", Menge: " + Menge + ", Preis: " + Preis;
         }
     }
 }
