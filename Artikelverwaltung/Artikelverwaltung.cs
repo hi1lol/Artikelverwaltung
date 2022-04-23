@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Text.Json;
 
@@ -8,7 +7,7 @@ namespace Artikelverwaltung
 {
     class Artikelverwaltung
     {
-        private List<Artikel> ArtikelListe { get; set; }
+        public List<Artikel> ArtikelListe { get; set; }
         private string file = Directory.GetCurrentDirectory() + "\\artikel.json";
 
 
@@ -19,52 +18,41 @@ namespace Artikelverwaltung
        
 
         public void add(Artikel art) {
-            if (ArtikelListe.Contains(art))
-            {
-                Console.WriteLine("Der Artikel existiert schon!");
-            }else
-            {
+           
                 ArtikelListe.Add(art);
-            }
+            
             
         }
 
-        public void del(Artikel art) {
-            if (ArtikelListe.Remove(art))
+        public void del(string artikelnummer) {
+            if (ArtikelListe.Remove(getArtikel(artikelnummer)))
             {
                 Console.WriteLine("Artikel erfolgreich gelöscht!");
             }
             else 
             {
-                Console.WriteLine("Artikel konnte nicht gelöscht werden!");
+                Console.WriteLine("Artikel nicht vorhanden!");
             }
         }
 
         public void update(Artikel art) {
             for (int i = 0; i<ArtikelListe.Count;i++)
             {
-                if (ArtikelListe[i].Equals(art))
+                if (ArtikelListe[i].Artikelnummer.Equals(art.Artikelnummer, StringComparison.OrdinalIgnoreCase))
                 {
                     ArtikelListe[i] = art;
                 }
             }
         }
-        public Artikel getArtikel(string artikelname, bool isName)
+        public Artikel getArtikel(string artikelnummer)
         {
             foreach (Artikel artikel in ArtikelListe) 
             {
-                if (isName)
-                {
-                    if(artikel.Artikelbezeichnung.Equals(artikelname,StringComparison.OrdinalIgnoreCase))
-                        return artikel;
-                }
-                else
-                {
-                    if (artikel.Artikelnummer.Equals(artikelname, StringComparison.OrdinalIgnoreCase))
-                        return artikel;
-                }
+                
+                if (artikel.Artikelnummer.Equals(artikelnummer, StringComparison.OrdinalIgnoreCase))
+                    return artikel;
+                
             }
-            Console.WriteLine("Artikel nicht gefunden!");
             return null;
         }
 
@@ -106,6 +94,7 @@ namespace Artikelverwaltung
                     }
                 }
             }
+            string json = JsonSerializer.Serialize(ArtikelListe);
             File.WriteAllText(file, JsonSerializer.Serialize(ArtikelListe));
             Console.WriteLine("Lager wurde erfolgreich gespeichert!");
 
@@ -124,6 +113,7 @@ namespace Artikelverwaltung
                 Console.WriteLine("Die Datei: " + file + " existiert nicht!");
             }
 
+            
         }
     }
 }

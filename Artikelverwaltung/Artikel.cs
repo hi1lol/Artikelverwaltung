@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
-
+﻿
 namespace Artikelverwaltung
 {
-    class Artikel : IEquatable<Artikel>
+    class Artikel
     {
         public string Artikelnummer { get; set; }
         public string Artikelbezeichnung { get; set; }
@@ -28,11 +24,5 @@ namespace Artikelverwaltung
                 ", Einheit: " + Mengeneinheit + ", Menge: " + Menge + ", Preis: " + Preis;
         }
 
-        public bool Equals(Artikel other)
-        {
-            if (this.Artikelnummer.Equals(other.Artikelnummer, StringComparison.OrdinalIgnoreCase)) 
-                return true;
-            return false;
-        }
     }
 }
